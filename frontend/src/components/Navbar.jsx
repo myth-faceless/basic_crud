@@ -13,12 +13,12 @@ const Navbar = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item list">
-                <NavLink to="/">
+              <li className="nav-item list" >
+                <NavLink to="/" style={{textDecoration:'none'}} className={'mx-2'}>
                   <span>Home</span>
                 </NavLink>
 
-                <NavLink to="register">
+                <NavLink to="register" style={{textDecoration:'none'}}>
                   <span>Register</span>
                 </NavLink>
 
