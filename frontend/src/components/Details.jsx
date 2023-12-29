@@ -27,7 +27,6 @@ const Details = () => {
                         <div className="left_view col-lg-6 col-md-6 col-12">
 
                             <h3 className='mt-3'>Name: <span style={{ fontWeight: 300, fontSize: 20 }}>Manis</span></h3>
-                            <h3 className='mt-3'>Age: <span style={{ fontWeight: 300 }}>24</span></h3>
                             <p className='mt-3'><EmailIcon /> Email:<span style={{ fontWeight: 300 }}>manis@manis.com</span></p>
                             <p className='mt-3'><WorkIcon /> Occupation: <span style={{ fontWeight: 300 }}>MERN Developer</span></p>
                         </div>
