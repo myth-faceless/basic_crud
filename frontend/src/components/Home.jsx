@@ -3,13 +3,16 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
+import { NavLink } from "react-router-dom"
 
 const Home = () => {
     return (
         <div className='mt-5'>
             <div className="container">
                 <div className="add_btn mt-2">
-                    <button className='btn btn-primary'> <AddIcon /> Add Data</button>
+                    <NavLink to='/register' className='btn btn-primary'>
+                        <AddIcon /> Add Data
+                    </NavLink>
                 </div>
                 <div className="table-responsive">
                     <table className="table table-striped table-bordered mt-2">
