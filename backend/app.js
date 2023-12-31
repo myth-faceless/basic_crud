@@ -1,30 +1,24 @@
-// require('dotenv').config()
-// const express = require('express')
-import dotenv from "dotenv";
-import express from "express"
-
-import connectDB from "./db/conn.js";
-
+import express from "express";
 import cors from "cors";
 
-dotenv.config({
-//    path: './env'  give path if the .env file and app.js files are in sepetate folder structure. In this case, both .env and app are in root folder so we do not have to give path.
-})
+const app = express()
 
-const port = process.env.PORT
-// console.log(port)
+app.use(cors({
+    origin: process.env.CORS_ORIGIN,
+    credentials:true
+}))
 
-const app = express();
-
-
-//for handling data
-app.use(cors())
-app.use(express.json())
+app.use(express.json({limit: "16kb"}))
+app.use(express.urlencoded({extended: true, limit: "16kb"}))
+app.use(express.static("public"))
 
 
 
-app.listen(port || 8000, () => {
-    console.log(`Server is starting on port ${port}`)
-})
+//routes import 
+import router from "./routes/user.route.js"
 
-connectDB();
+
+//routes declaration
+app.use("/api/v1", router)
+
+export { app }
