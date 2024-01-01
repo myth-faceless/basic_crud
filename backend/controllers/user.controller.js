@@ -3,6 +3,8 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 
+
+// register user
 const registerUser = asyncHandler (async (req, res) => {
     // console.log(req.body)
     const { name, email, occupation, contact, address, description } = req.body;
@@ -38,4 +40,18 @@ const registerUser = asyncHandler (async (req, res) => {
     )
 })
 
-export { registerUser }
+// get user data
+
+const getData = asyncHandler (async (req, res) => {
+    const userdata = await User.find();
+    if(!userdata) {
+        throw new ApiError(404, "No user data found !")
+    }
+
+    return res.status(201).json(
+        new ApiResponse(200, userdata)
+    )
+
+})
+
+export { registerUser, getData }
