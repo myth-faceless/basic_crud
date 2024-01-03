@@ -6,6 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 
+
 const Home = () => {
     const [getUserData, setUserData] = useState([]);
     // console.log("HEHEH",getUserData)
@@ -55,7 +56,7 @@ const Home = () => {
                                     <td>{user.contact}</td>
                                     <td className='d-flex justify-content-between'>
                                         <NavLink to={`view/${user._id}`} > <button className='btn btn-success'><RemoveRedEyeIcon /></button> </NavLink>
-                                        <button className='btn btn-primary'><CreateIcon /></button>
+                                        <NavLink to={`edit/${user._id}`} > <button className='btn btn-primary'><CreateIcon /></button> </NavLink>
                                         <button className='btn btn-danger'><DeleteIcon /></button>
                                     </td>
                                 </tr>

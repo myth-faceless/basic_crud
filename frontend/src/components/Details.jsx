@@ -6,11 +6,12 @@ import CardContent from '@mui/material/CardContent';
 import EmailIcon from '@mui/icons-material/Email';
 import WorkIcon from '@mui/icons-material/Work';
 import SmartphoneIcon from '@mui/icons-material/Smartphone';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, } from 'react-router-dom';
 import axios from 'axios';
 
 const Details = () => {
 
+    const navigate = useNavigate();
     const {id} = useParams(""); //id nai kina lekheako vanda, it should match with route.(getuser/:id). userId vanera variable banayo vaney make sure route ma pani userId nai cha.
     // console.log((id));
 
@@ -31,7 +32,9 @@ const Details = () => {
         getData();
     }, []);
 
-
+    const handleClick = () => {
+        navigate(`/edit/${id}`)
+    }
 
     return (
         
@@ -45,7 +48,7 @@ const Details = () => {
                             <img src="../src/assets/avatar.png" style={{ width: 50 }} alt="profile_pic" />
                         </div>
                         <div className="add_btn">
-                            <button className='btn btn-primary mx-2 mx-2'><CreateIcon /></button>
+                            <button className='btn btn-primary mx-2 mx-2' onClick={handleClick}><CreateIcon /></button>
                             <button className='btn btn-danger'><DeleteIcon /></button>
                         </div>
                     </div>

@@ -75,8 +75,27 @@ const getUser = asyncHandler( async (req, res) => {
         new ApiResponse(200, user)
     )
 
-
-
 })
 
-export { registerUser, getData, getUser }
+// update user Data
+
+const updateUser = asyncHandler (async (req,res) => {
+    const {id} = req.params;
+    const user = await User.findById(id)
+    if(!user) {
+        throw new ApiError(404, "User not found")
+    }
+    const update = await User.findByIdAndUpdate(id,req.body,{
+        new:true
+    });
+
+    if(!update) {
+        throw new ApiError(500, "Server Error !")
+    }
+
+    return res.status(200).json(
+        new ApiResponse(200, update)
+    )
+})
+
+export { registerUser, getData, getUser, updateUser }
