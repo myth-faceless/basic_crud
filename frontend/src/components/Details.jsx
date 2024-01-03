@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import EmailIcon from '@mui/icons-material/Email';
 import WorkIcon from '@mui/icons-material/Work';
 import SmartphoneIcon from '@mui/icons-material/Smartphone';
+import PlaceIcon from '@mui/icons-material/Place';
 import { useParams, useNavigate, } from 'react-router-dom';
 import axios from 'axios';
 
@@ -36,6 +37,18 @@ const Details = () => {
         navigate(`/edit/${id}`)
     }
 
+    const deleteData = async() => {
+       const confirmDelete = window.confirm("Are you sure you want to delete the data ?")
+        if (confirmDelete) {
+         try {
+             const res = await axios.delete(`/api/v1/deleteuser/${id}`)
+             navigate('/')
+         } catch (error) {
+             console.error("Error Deleting Data !", error)
+         }
+       }
+    }
+
     return (
         
         <div className='container mt-5'>
@@ -49,21 +62,21 @@ const Details = () => {
                         </div>
                         <div className="add_btn">
                             <button className='btn btn-primary mx-2 mx-2' onClick={handleClick}><CreateIcon /></button>
-                            <button className='btn btn-danger'><DeleteIcon /></button>
+                            <button className='btn btn-danger' onClick={deleteData}><DeleteIcon /></button>
                         </div>
                     </div>
                     <div className='row'>
                         <div className="left_view col-lg-6 col-md-6 col-12">
 
                             <h3 className='mt-3'>Name: <span style={{ fontWeight: 350, fontSize: 25 }}>{getUserData.name}</span></h3>
-                            <p className='mt-3'><EmailIcon /> Email:<span style={{ fontWeight: 300 }}>{getUserData.email}.com</span></p>
-                            <p className='mt-3'><WorkIcon /> Occupation: <span style={{ fontWeight: 300 }}>{getUserData.occupation}</span></p>
+                            <p className='mt-3'><EmailIcon /> <strong>Email</strong>:<span style={{ fontWeight: 300 }}>{getUserData.email}.com</span></p>
+                            <p className='mt-3'><WorkIcon /> <strong>Occupation</strong>: <span style={{ fontWeight: 300 }}>{getUserData.occupation}</span></p>
                         </div>
 
                         <div className="right_view col-lg-6 col-md-6 col-12">
-                            <p className='mt-3'><SmartphoneIcon /> Mobile: <span style={{ fontWeight: 300 }}>{getUserData.contact}</span></p>
-                            <p className='mt-3'>Location: <span style={{ fontWeight: 300 }}>{getUserData.address}</span></p>
-                            <p className='mt-3'>Description: <span style={{ fontWeight: 300 }}>{getUserData.description}</span></p>
+                            <p className='mt-3'><SmartphoneIcon /> <strong>Contact</strong>: <span style={{ fontWeight: 300 }}>{getUserData.contact}</span></p>
+                            <p className='mt-3'> <PlaceIcon /> <strong>Address</strong>: <span style={{ fontWeight: 300 }}>{getUserData.address}</span></p>
+                            <p className='mt-3'><strong>Description</strong>: <span style={{ fontWeight: 300 }}>{getUserData.description}</span></p>
 
                         </div>
                     </div>

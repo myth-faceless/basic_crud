@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import axios from "axios"
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
+
+    const navigate = useNavigate();
 
     const [getData, setData] = useState({
         name: "",
@@ -41,6 +44,7 @@ const Register = () => {
 
                 // Show an alert box
                 window.alert("Registration Successful!");
+                navigate('/');
             } else {
                 console.error("Unexpected Response:", res);
             }

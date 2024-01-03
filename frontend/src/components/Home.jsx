@@ -25,6 +25,21 @@ const Home = () => {
         getData();
     }, []);
 
+
+    const deleteData = async (userId) => {
+
+        const confirmDelete = window.confirm("Are you sure you want to delete data ?");
+
+      if (confirmDelete) {
+          try {
+              const res = await axios.delete(`/api/v1/deleteuser/${userId}`)  
+              getData();          
+          } catch (error) {
+              console.error("Error Deleting Data !", error)
+          }
+      }
+    }
+
     return (
         <div className='mt-5'>
             <div className="container">
@@ -57,7 +72,7 @@ const Home = () => {
                                     <td className='d-flex justify-content-between'>
                                         <NavLink to={`view/${user._id}`} > <button className='btn btn-success'><RemoveRedEyeIcon /></button> </NavLink>
                                         <NavLink to={`edit/${user._id}`} > <button className='btn btn-primary'><CreateIcon /></button> </NavLink>
-                                        <button className='btn btn-danger'><DeleteIcon /></button>
+                                        <button className='btn btn-danger' onClick={()=>deleteData(user._id)}><DeleteIcon /></button>
                                     </td>
                                 </tr>
                             ))}
