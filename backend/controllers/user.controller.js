@@ -2,6 +2,7 @@ import { User } from "../models/user.model.js"
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
+import mongoose from "mongoose";
 
 
 // register user
@@ -48,10 +49,34 @@ const getData = asyncHandler (async (req, res) => {
         throw new ApiError(404, "No user data found !")
     }
 
-    return res.status(201).json(
+    return res.status(200).json(
         new ApiResponse(200, userdata)
     )
 
 })
 
-export { registerUser, getData }
+
+// get individual user data 
+
+const getUser = asyncHandler( async (req, res) => {
+    // console.log(req.params)
+    const userId = req.params.id;
+
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(400).json({ error: 'Invalid userId format' });
+     }
+    const user = await User.findById(userId);
+
+    if(!user) {
+        throw new ApiError(404, "User not found !")
+    }
+
+    return res.status(200).json(
+        new ApiResponse(200, user)
+    )
+
+
+
+})
+
+export { registerUser, getData, getUser }

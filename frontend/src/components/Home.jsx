@@ -8,12 +8,13 @@ import axios from "axios";
 
 const Home = () => {
     const [getUserData, setUserData] = useState([]);
+    // console.log("HEHEH",getUserData)
 
     const getData = async () => {
         try {
             const res = await axios.get("/api/v1/getdata");
             setUserData(res.data.data);
-            console.log(res.data);
+            // console.log(res.data);
         } catch (error) {
             console.error("Error fetching data!", error);
         }
@@ -40,19 +41,20 @@ const Home = () => {
                                 <th scope="col">Email</th>
                                 <th scope="col">Job</th>
                                 <th scope="col">Number</th>
+
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {Array.isArray(getUserData) && getUserData.map((user, id) => (
-                                <tr key={user.id}>
+                                <tr key={id}>
                                     <th scope="row">{id + 1}</th>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
                                     <td>{user.occupation}</td>
                                     <td>{user.contact}</td>
                                     <td className='d-flex justify-content-between'>
-                                        <button className='btn btn-success'><RemoveRedEyeIcon /></button>
+                                        <NavLink to={`view/${user._id}`} > <button className='btn btn-success'><RemoveRedEyeIcon /></button> </NavLink>
                                         <button className='btn btn-primary'><CreateIcon /></button>
                                         <button className='btn btn-danger'><DeleteIcon /></button>
                                     </td>
